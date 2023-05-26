@@ -23,7 +23,7 @@ model.fc = nn.Linear(512, 1)
 model.load_state_dict(torch.load('kotosobaki.pt', map_location=torch.device('cpu')))
 model.eval()
 resize = T.Resize((224, 224)).cpu()
-#img = resize(io.read_image('dog.jpeg')/255)
+img = resize(io.read_image('dog.jpeg')/255)
 
 
 st.markdown("# Котики и собачки 🎉")
@@ -37,7 +37,8 @@ if (input_file is not None):
     img_array = np.array(image)
     new_img = torch.from_numpy(img_array)
     #print(new_img)
-    new_img = resize(new_img/255)
+    new_img = resize(torch.load(io.BytesIO(input_file)/255))
+    # = resize(new_img/255)
     #print(new_img)
     #print(new_img.shape)
 
