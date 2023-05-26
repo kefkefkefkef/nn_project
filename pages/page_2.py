@@ -35,4 +35,4 @@ if (input_file is not None) and input_file.name.endswith(".jpg"):
     pred_class = ('Dog' if model(img.unsqueeze(0)).item()>0 else 'Cat')
     #real_class=('Dog' if true_label[0]==1 else 'Cat')
     st.write(pred_class)
-print(pred_class)
+#print(pred_class)
