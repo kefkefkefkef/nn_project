@@ -29,7 +29,7 @@ input_file = st.file_uploader("Загрузите картинку",type=['jpg']
 if (input_file is not None) and input_file.name.endswith(".jpg"):
     #img = resize(input_file/255)
     #img, true_label = next(iter(train_loader))
-    img = input_file.to(device)
+    img = input_file#.to(device)
 
     pred_class = ('Dog' if model.to(device)(img.unsqueeze(0)).softmax(dim=1).argmax().item()==1 else 'Cat')
     #real_class=('Dog' if true_label[0]==1 else 'Cat')
