@@ -19,14 +19,14 @@ model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
 #model.load_state_dict(torch.load('resnet_cats_dogs.py'))
 resize = T.Resize((224, 224))
-img = resize(io.read_image('cat.jpg')/255)
+#img = resize(io.read_image('cat.jpg')/255)
 
 
 st.markdown("# Котики и собачки 🎉")
 st.sidebar.markdown("# Котики и собачки 🎉")
 
-#input_file = st.file_uploader("Загрузите картинку",type=['jpg'])
-#img = resize(input_file/255)
+input_file = st.file_uploader("Загрузите картинку",type=['jpg'])
+img = resize(input_file/255)
 #img, true_label = next(iter(train_loader))
 img = img.to(device)
 
