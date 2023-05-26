@@ -37,6 +37,8 @@ if (input_file is not None):
     img_array = np.array(image)
     new_img = torch.from_numpy(img_array)
     #print(new_img)
+    with open('tensor.pt', 'rb') as f:
+        input_file = io.BytesIO(f.read())
     new_img = resize(torch.load(input_file, map_location=torch.device('cpu'))/255)
     # = resize(new_img/255)
     #print(new_img)
