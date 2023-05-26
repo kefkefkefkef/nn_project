@@ -33,7 +33,7 @@ if (input_file is not None):
     st.write(input_file)
     image = Image.open(input_file)
     img_array = np.array(image)
-    img_array = resize(io.read_image(input_file)/255)
+    img_array = resize(img_array/255)
     
 
     pred_class = ('Dog' if model(img_array.unsqueeze(0)).item()>0 else 'Cat')
