@@ -17,7 +17,7 @@ device = 'cpu'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
-model.cpu().load_state_dict(torch.load('kotosobaki.pt'))
+model.load_state_dict(torch.load('kotosobaki.pt'))
 model.eval()
 resize = T.Resize((224, 224))
 img = resize(io.read_image('dog.jpeg')/255)
@@ -31,7 +31,7 @@ if (input_file is not None) and input_file.name.endswith(".jpg"):
     img = resize(input_file/255)
     img = img.to(device)
 
-    pred_class = ('Dog' if model.to(device)(img.to(device).unsqueeze(0)).item()>0 else 'Cat')
+    pred_class = ('Dog' if model(img.unsqueeze(0)).item()>0 else 'Cat')
     #real_class=('Dog' if true_label[0]==1 else 'Cat')
     st.write(pred_class)
 print(pred_class)
