@@ -17,7 +17,7 @@ device = 'cuda'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
-model.to(device).load_state_dict(torch.load('kotosobaki.pt'))
+model.load_state_dict(torch.load('kotosobaki.pt'))
 model.eval()
 resize = T.Resize((224, 224))
 img = resize(io.read_image('dog.jpeg')/255)
