@@ -16,6 +16,7 @@ from torchvision.models import resnet18, ResNet18_Weights
 device = 'cuda'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
+model.to(device)
 model.fc = nn.Linear(512, 1)
 model.load_state_dict(torch.load('kotosobaki.pt'))
 model.eval()
