@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import time
 from typing import Tuple
 from PIL import Image
-import tensorflow as tf
+#import tensorflow as tf
 
 from torchvision.models import resnet18, ResNet18_Weights
 device = 'cpu'
