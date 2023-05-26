@@ -15,7 +15,8 @@ from typing import Tuple
 from torchvision.models import resnet18, ResNet18_Weights
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
-model.load_state_dict(torch.load('../resnet_cats_dogs.py'))
+model.fc = nn.Linear(512, 1)
+model.load_state_dict(torch.load('/home/kef/nn_project/resnet_cats_dogs.py'))
 resize = T.Resize((224, 224))
 #img = resize(io.read_image('cat.jpg')/255)
 device = 'cuda'
@@ -30,5 +31,4 @@ img = img.to(device)
 
 pred_class = ('Dog' if model.to(device)(img.unsqueeze(0)).softmax(dim=1).argmax().item()==1 else 'Cat')
 #real_class=('Dog' if true_label[0]==1 else 'Cat')
-
 st.write(pred_class)
