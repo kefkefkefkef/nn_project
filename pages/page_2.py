@@ -17,9 +17,9 @@ device = 'cpu'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
-model.load_state_dict(torch.load('resnet_cats_dogs.py'), map_location=torch.device('cpu'))
+#model.load_state_dict(torch.load('resnet_cats_dogs.py'))
 resize = T.Resize((224, 224))
-#img = resize(io.read_image('cat.jpg')/255)
+img = resize(io.read_image('cat.jpg')/255)
 
 
 st.markdown("# Котики и собачки 🎉")
