@@ -17,9 +17,10 @@ device = 'cpu'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
-#model.to(device).load_state_dict(torch.load('resnet_cats_dogs.py'))
+model.to(device).load_state_dict(torch.load('kotosobaki.pt'))
+model.eval()
 resize = T.Resize((224, 224))
-img = resize(io.read_image('dog-puppy.jpg')/255)
+#img = resize(io.read_image('dog.jpeg')/255)
 
 
 st.markdown("# Котики и собачки 🎉")
@@ -27,10 +28,10 @@ st.sidebar.markdown("# Котики и собачки 🎉")
 
 input_file = st.file_uploader("Загрузите картинку",type=['jpg'])
 if (input_file is not None) and input_file.name.endswith(".jpg"):
-    #img = resize(input_file/255)
+    img = resize(input_file/255)
     img = img.to(device)
 
-    pred_class = ('Dog' if model.to(device)(img.unsqueeze(0)).softmax(dim=1).argmax().item()==1 else 'Cat')
+    pred_class = ('Dog' if model.to(device)(img.unsqueeze(0)).item()>0 else 'Cat')
     #real_class=('Dog' if true_label[0]==1 else 'Cat')
     st.write(pred_class)
 #print(pred_class)
