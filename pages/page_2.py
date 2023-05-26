@@ -18,9 +18,9 @@ device = 'cpu'
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.to(device)
 model.fc = nn.Linear(512, 1)
-model.cpu().load_state_dict(torch.load('kotosobaki.pt'))
+model.load_state_dict(torch.load('kotosobaki.pt'))
 model.eval()
-resize = T.Resize((224, 224))
+resize = T.Resize((224, 224)).cpu()
 img = resize(io.read_image('dog.jpeg')/255)
 
 
