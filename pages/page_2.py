@@ -13,13 +13,14 @@ import time
 from typing import Tuple
 
 from torchvision.models import resnet18, ResNet18_Weights
+device = 'cuda'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
 model.load_state_dict(torch.load('pages/resnet_cats_dogs.py'))
 resize = T.Resize((224, 224))
-#img = resize(io.read_image('cat.jpg')/255)
-device = 'cuda'
+img = resize(io.read_image('cat.jpg')/255)
+
 
 st.markdown("# Котики и собачки 🎉")
 st.sidebar.markdown("# Котики и собачки 🎉")
@@ -32,3 +33,4 @@ img = img.to(device)
 pred_class = ('Dog' if model.to(device)(img.unsqueeze(0)).softmax(dim=1).argmax().item()==1 else 'Cat')
 #real_class=('Dog' if true_label[0]==1 else 'Cat')
 st.write(pred_class)
+#print(pred_class)
