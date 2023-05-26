@@ -13,7 +13,7 @@ import time
 from typing import Tuple
 
 from torchvision.models import resnet18, ResNet18_Weights
-device = 'cuda'
+device = 'cpu'
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.to(device)
