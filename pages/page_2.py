@@ -30,10 +30,9 @@ st.sidebar.markdown("# Котики и собачки 🎉")
 input_file = st.file_uploader("Загрузите картинку",type=['jpg'])
 if (input_file is not None) and input_file.name.endswith(".jpg"):
     st.write(input_file)
-    img = resize(input_file/255)
+    img = resize(input_file.getvalue()/255)
     img = img.to(device)
 
     pred_class = ('Dog' if model(img.unsqueeze(0)).item()>0 else 'Cat')
-    #real_class=('Dog' if true_label[0]==1 else 'Cat')
     st.write(pred_class)
 #print(pred_class)
