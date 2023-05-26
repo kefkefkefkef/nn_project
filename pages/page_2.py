@@ -16,7 +16,7 @@ from torchvision.models import resnet18, ResNet18_Weights
 
 model = resnet18(weights=ResNet18_Weights.DEFAULT)
 model.fc = nn.Linear(512, 1)
-model.load_state_dict(torch.load('/home/kef/nn_project/resnet_cats_dogs.py'))
+model.load_state_dict(torch.load('pages/resnet_cats_dogs.py'))
 resize = T.Resize((224, 224))
 #img = resize(io.read_image('cat.jpg')/255)
 device = 'cuda'
