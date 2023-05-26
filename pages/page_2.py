@@ -29,6 +29,7 @@ st.sidebar.markdown("# Котики и собачки 🎉")
 
 input_file = st.file_uploader("Загрузите картинку",type=['jpg'])
 if (input_file is not None) and input_file.name.endswith(".jpg"):
+    st.write(input_file)
     img = resize(input_file/255)
     img = img.to(device)
 
