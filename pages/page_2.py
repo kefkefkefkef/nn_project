@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import time
 from typing import Tuple
 from PIL import Image
+import tensorflow as tf
 
 from torchvision.models import resnet18, ResNet18_Weights
 device = 'cpu'
@@ -32,10 +33,14 @@ input_file = st.file_uploader("Загрузите картинку",type=["png",
 if (input_file is not None):
     st.write(input_file)
     image = Image.open(input_file)
+    #image = Image.open('dog.jpeg')
     img_array = np.array(image)
-    img_array = resize(img_array/255)
-    
+    new_img = torch.from_numpy(img_array)
+    #print(new_img)
+    new_img = resize(new_img/255)
+    #print(new_img)
+    #print(new_img.shape)
 
-    pred_class = ('Dog' if model(img_array.unsqueeze(0)).item()>0 else 'Cat')
+    pred_class = ('Dog' if model(new_img.unsqueeze(0)).item()>0 else 'Cat')
     st.write(pred_class)
 #print(pred_class)
